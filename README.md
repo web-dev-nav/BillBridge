@@ -1,18 +1,76 @@
-# BillBridge - Invoice & Payment Management System
+# BillBridge - Invoice Management System
 
-BillBridge is a comprehensive Laravel-based invoice and payment management system built with Filament admin panels. It provides both admin and client portals for managing invoices, quotes, payments, and client relationships.
+This is the Invoice Management System where users can manage all the invoices in one place and digitally.
 
-## Features
+The client will get its separate login panel from where he can see the lists of his invoices and do payments.
 
-- **Admin Panel**: Complete invoice and payment management system
-- **Client Portal**: Client-facing dashboard for viewing invoices and making payments
-- **Multi-language Support**: Available in multiple languages (English, Arabic, French, German, Spanish, Portuguese, Russian, Turkish, Chinese)
-- **Payment Gateways**: Supports Stripe, PayPal, Razorpay, Paystack, and MercadoPago
-- **PDF Generation**: Custom invoice and quote templates with PDF export
-- **Recurring Invoices**: Automated recurring invoice generation
-- **QR Code Payments**: QR code generation for payment links
-- **Email Notifications**: Automated email notifications for invoices and payments
-- **Export Functionality**: Excel export for invoices, payments, and transactions
+## Multi-Languages Support
+We are supporting 9 languages in each panel (Admin | Client):
+- English
+- Spanish
+- French
+- German
+- Russian
+- Portuguese
+- Arabic
+- Chinese
+- Turkish
+
+## Admin Panel
+
+### Dashboard
+Powerful admin dashboard where admin can see the overview of the application, what's going on, what are the revenue, etc.
+
+### Clients
+You can create a client from the admin panel, and yes of course clients will get their separate panel, where they can see his assigned/sent invoices and perform related actions.
+
+### Products
+You can create your products from where, which will be later used in invoice creation. You can define the price, set image, and related information.
+
+### Product Categories
+You can create different kinds of product categories which will be used in product creation, you can choose categories while creating products.
+
+### Taxes
+You can create different kinds of taxes from here, e.g GST / IGST / etc with related percentages. Taxes will be used while creating the invoice.
+
+### Transactions
+All the invoices transactions will be listed here, either it will be manually or via stripe. you can see the detailed information here.
+
+### Settings
+You can manage to generate settings from here, like the app logo, favicon the currency, and company address.
+
+Also, you can manage the number format and decimal separator settings from here.
+
+### Invoice Template
+We are supporting the beautiful invoice template, which is used when you print the invoice template. You can manage the downloaded invoice format by using this interface.
+
+### Multi Currency
+You can add your currency here, whatever you want to show before the price everywhere. The selected currency will be reflected everywhere in the project.
+
+### Multi-Lingual
+It comes up with 9 different languages and multi-currency options.
+
+## Client Panel
+
+### Dashboard
+Attractive and Powerful dashboard from where the client can see the overview of his invoices, how many invoices are still pending or paid, etc.
+
+### Invoices
+The client can see only assigned invoices, he can print invoices and check details of them. Also, clients can pay the invoice manually or via the stripe payment gateway.
+
+### Pay Invoice
+Clients can pay invoices in multiple ways. We are supporting the partial payment option, so let's say there is a $1000 invoice and the client wants to pay just $500 then he can choose Partial payment while paying the invoice.
+
+Later when the client does the next payment he will just see $500 remains as he already paid $500.
+
+### Print Invoices
+Clients can print the invoices from the details screen, we are supporting the attractive invoices templates.
+
+### Transactions
+Here the client can see his invoices payment history and reports, whatever transaction he made will be recorded here.
+
+## Payment Gateways
+We are supporting the stripe and PayPal payment gateway to pay invoices from the customer side.
 
 ## Technology Stack
 
