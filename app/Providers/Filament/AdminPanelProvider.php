@@ -63,9 +63,9 @@ class AdminPanelProvider extends PanelProvider
             ->favicon((function () {
                 try {
                     DB::connection()->getPdo();
-                    return Setting::where('key', 'favicon_icon')->first()?->value ?? asset('assets/images/infyom.png');
+                    return Setting::where('key', 'favicon_icon')->first()?->value ?? asset('assets/images/billbridge.png');
                 } catch (\Exception $e) {
-                    return asset('assets/images/infyom.png');
+                    return asset('assets/images/billbridge.png');
                 }
             })())
             ->spaUrlExceptions(fn() => [

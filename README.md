@@ -119,6 +119,16 @@ BillBridge/
 6. Seed the database: `php artisan db:seed`
 7. Build assets: `npm run build`
 
+## Default Admin Credentials
+
+After seeding the database, you can login to the admin panel with:
+
+- **Email**: `admin@billbridge.com`
+- **Password**: `123456`
+
+**Admin Panel**: `http://localhost:8000/admin`  
+**Client Panel**: `http://localhost:8000/client`
+
 ## Development
 
 - Start development server: `composer run dev`

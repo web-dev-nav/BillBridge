@@ -77,9 +77,51 @@ class InvoiceController extends Controller
         $invoiceItems = $invoice->invoiceItems;
         $data['invoice_template_color'] = $invoice->invoiceTemplate->template_color;
         $data['totalTax'] = [];
-        $imageData = $invoice->paymentQrCode ? Http::get($invoice->paymentQrCode->qr_image)->body() : '';
-        $imageType =  $invoice->paymentQrCode ? pathinfo($invoice->paymentQrCode->qr_image, PATHINFO_EXTENSION) : '';
-        $base64Image =  $invoice->paymentQrCode ?  'data:image/' . $imageType . ';base64,' . base64_encode($imageData) : '';
+        $imageData = '';
+        $imageType = '';
+        $base64Image = '';
+        
+        if ($invoice->paymentQrCode && $invoice->paymentQrCode->qr_image) {
+            $qrImagePath = $invoice->paymentQrCode->qr_image;
+            
+            // Check if it's a URL or a local path
+            if (filter_var($qrImagePath, FILTER_VALIDATE_URL)) {
+                // If it's a URL, check if it's a local URL
+                $localUrl = parse_url($qrImagePath);
+                $currentUrl = parse_url(config('app.url'));
+                
+                if ($localUrl['host'] === $currentUrl['host'] || $localUrl['host'] === '127.0.0.1' || $localUrl['host'] === 'localhost') {
+                    // Convert to local file path
+                    $relativePath = ltrim($localUrl['path'], '/');
+                    $localPath = public_path($relativePath);
+                    
+                    if (file_exists($localPath)) {
+                        $imageData = file_get_contents($localPath);
+                        $imageType = pathinfo($localPath, PATHINFO_EXTENSION);
+                    }
+                } else {
+                    // External URL, use HTTP request
+                    try {
+                        $imageData = Http::timeout(10)->get($qrImagePath)->body();
+                        $imageType = pathinfo($qrImagePath, PATHINFO_EXTENSION);
+                    } catch (\Exception $e) {
+                        // Log error and continue without image
+                        \Log::warning('Failed to fetch QR code image: ' . $e->getMessage());
+                    }
+                }
+            } else {
+                // It's already a local path
+                $localPath = public_path($qrImagePath);
+                if (file_exists($localPath)) {
+                    $imageData = file_get_contents($localPath);
+                    $imageType = pathinfo($localPath, PATHINFO_EXTENSION);
+                }
+            }
+            
+            if ($imageData) {
+                $base64Image = 'data:image/' . $imageType . ';base64,' . base64_encode($imageData);
+            }
+        }
 
         $data['qrImg'] = $base64Image;
 

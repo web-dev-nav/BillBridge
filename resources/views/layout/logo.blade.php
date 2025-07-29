@@ -1,6 +1,6 @@
 <div class="flex items-center gap-4">
     <a href="{{ url('/') }}" class="flex items-center gap-4">
-        <img src="{{ asset(\App\Models\Setting::where('key', 'app_logo')->first()->value ?? asset('assets/images/infyom.png')) }}"
+        <img src="{{ getLogoUrl() }}"
             alt="{{ getAppName() }}" width="50" height="50">
         <span class="font-bold"
             x-tooltip="{

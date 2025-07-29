@@ -14,8 +14,8 @@ class SettingTableSeederFields extends Seeder
     {
         Setting::create([
             'key' => 'company_address',
-            'value' => 'C-303, Atlanta Shopping Mall, Nr. Sudama Chowk, Mota Varachha, Surat - 394101, Gujarat, India.',
+            'value' => '123 Main Street, Suite 100, Toronto, ON M5V 3A8, Canada',
         ]);
-        Setting::create(['key' => 'company_phone', 'value' => '+91 70963 36561']);
+        Setting::create(['key' => 'company_phone', 'value' => '+1 (416) 555-0123']);
     }
 }

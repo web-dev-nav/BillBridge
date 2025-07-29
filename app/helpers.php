@@ -42,7 +42,7 @@ if (! function_exists('getAppName')) {
             $appName = Setting::where('key', '=', 'app_name')->first();
         }
 
-        return $appName->value ?? 'InfyInvoices';
+        return $appName->value ?? 'BillBridge';
     }
 }
 
@@ -50,13 +50,28 @@ if (! function_exists('getLogoUrl')) {
 
     function getLogoUrl(): string
     {
-        static $appLogo;
+        static $logoUrl;
 
-        if (empty($appLogo)) {
+        if (empty($logoUrl)) {
             $appLogo = Setting::where('key', '=', 'app_logo')->first();
+            
+            if ($appLogo) {
+                // Check if there are media files attached
+                $media = $appLogo->media->first();
+                if (!empty($media)) {
+                    $logoUrl = $media->getFullUrl();
+                } else {
+                    // Use the value from database or fallback to default
+                    $logoPath = $appLogo->value ?? 'assets/images/billbridge.png';
+                    $logoUrl = asset($logoPath);
+                }
+            } else {
+                // Fallback if no setting exists
+                $logoUrl = asset('assets/images/billbridge.png');
+            }
         }
 
-        return asset($appLogo->logo_url);
+        return $logoUrl;
     }
 }
 
@@ -64,15 +79,86 @@ if (! function_exists('getPDFLogoUrl')) {
 
     function getPDFLogoUrl(): string
     {
-        static $appLogo;
+        static $logoUrl;
 
-        if (empty($appLogo)) {
+        if (empty($logoUrl)) {
             $appLogo = Setting::where('key', '=', 'app_logo')->first();
-            $imageData = Http::get($appLogo->logo_url)->body();
-            $imageType = pathinfo($appLogo->logo_url, PATHINFO_EXTENSION);
-            $base64Image = 'data:image/' . $imageType . ';base64,' . base64_encode($imageData);
-
-            $logoUrl = $base64Image;
+            
+            if ($appLogo && !empty($appLogo->logo_url)) {
+                $logoPath = $appLogo->logo_url;
+                
+                // Check if it's a URL or a local path
+                if (filter_var($logoPath, FILTER_VALIDATE_URL)) {
+                    // If it's a URL, check if it's a local URL
+                    $localUrl = parse_url($logoPath);
+                    $currentUrl = parse_url(config('app.url'));
+                    
+                    if (isset($localUrl['host']) && ($localUrl['host'] === ($currentUrl['host'] ?? 'localhost') || 
+                        $localUrl['host'] === '127.0.0.1' || $localUrl['host'] === 'localhost')) {
+                        // Convert to local file path
+                        $relativePath = ltrim($localUrl['path'], '/');
+                        $localPath = public_path($relativePath);
+                        
+                        if (file_exists($localPath)) {
+                            $imageData = file_get_contents($localPath);
+                            $imageType = pathinfo($localPath, PATHINFO_EXTENSION);
+                            $logoUrl = 'data:image/' . $imageType . ';base64,' . base64_encode($imageData);
+                        } else {
+                            // Fallback to default logo
+                            $defaultLogoPath = public_path('assets/images/billbridge.png');
+                            if (file_exists($defaultLogoPath)) {
+                                $imageData = file_get_contents($defaultLogoPath);
+                                $logoUrl = 'data:image/png;base64,' . base64_encode($imageData);
+                            } else {
+                                $logoUrl = '';
+                            }
+                        }
+                    } else {
+                        // External URL, use HTTP request with timeout
+                        try {
+                            $imageData = Http::timeout(10)->get($logoPath)->body();
+                            $imageType = pathinfo($logoPath, PATHINFO_EXTENSION);
+                            $logoUrl = 'data:image/' . $imageType . ';base64,' . base64_encode($imageData);
+                        } catch (\Exception $e) {
+                            // Log error and use default logo
+                            \Log::warning('Failed to fetch logo image: ' . $e->getMessage());
+                            $defaultLogoPath = public_path('assets/images/billbridge.png');
+                            if (file_exists($defaultLogoPath)) {
+                                $imageData = file_get_contents($defaultLogoPath);
+                                $logoUrl = 'data:image/png;base64,' . base64_encode($imageData);
+                            } else {
+                                $logoUrl = '';
+                            }
+                        }
+                    }
+                } else {
+                    // It's already a local path
+                    $localPath = public_path($logoPath);
+                    if (file_exists($localPath)) {
+                        $imageData = file_get_contents($localPath);
+                        $imageType = pathinfo($localPath, PATHINFO_EXTENSION);
+                        $logoUrl = 'data:image/' . $imageType . ';base64,' . base64_encode($imageData);
+                    } else {
+                        // Fallback to default logo
+                        $defaultLogoPath = public_path('assets/images/infyom.png');
+                        if (file_exists($defaultLogoPath)) {
+                            $imageData = file_get_contents($defaultLogoPath);
+                            $logoUrl = 'data:image/png;base64,' . base64_encode($imageData);
+                        } else {
+                            $logoUrl = '';
+                        }
+                    }
+                }
+            } else {
+                // No logo setting found, use default
+                $defaultLogoPath = public_path('assets/images/infyom.png');
+                if (file_exists($defaultLogoPath)) {
+                    $imageData = file_get_contents($defaultLogoPath);
+                    $logoUrl = 'data:image/png;base64,' . base64_encode($imageData);
+                } else {
+                    $logoUrl = '';
+                }
+            }
         }
 
         return $logoUrl;

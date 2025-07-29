@@ -16,7 +16,7 @@ class SettingFavIconFieldSeeder extends Seeder
         $companyLogo = Setting::where('key', 'company_logo')->firstOrFail();
         $companyLogo->delete();
 
-        $imageUrl = 'web/media/logos/favicon.png';
+        $imageUrl = 'assets/images/billbridge.png';
         Setting::create([
             'key' => 'favicon_icon',
             'value' => $imageUrl,

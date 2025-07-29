@@ -11,11 +11,11 @@ return new class extends Migration
     public function up(): void
     {
         $settings = [
-            ['key' => 'city', 'value' => 'Surat'],
-            ['key' => 'state', 'value' => 'Gujarat'],
-            ['key' => 'country', 'value' => 'India'],
-            ['key' => 'zipcode', 'value' => '394101'],
-            ['key' => 'fax_no', 'value' => '555-123-4567'],
+            ['key' => 'city', 'value' => 'Toronto'],
+            ['key' => 'state', 'value' => 'Ontario'],
+            ['key' => 'country', 'value' => 'Canada'],
+            ['key' => 'zipcode', 'value' => 'M5V 3A8'],
+            ['key' => 'fax_no', 'value' => '+1 (416) 555-0124'],
             ['key' => 'show_additional_address_in_invoice', 'value' => 0],
         ];
         foreach ($settings as $setting) {
