@@ -5,7 +5,8 @@
       "Bash(grep:*)",
       "Bash(cp:*)",
       "Bash(chmod:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(mv:*)"
     ],
     "deny": []
   }

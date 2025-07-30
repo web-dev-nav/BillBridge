@@ -95,9 +95,18 @@ if (! function_exists('getPDFLogoUrl')) {
                     
                     if (isset($localUrl['host']) && ($localUrl['host'] === ($currentUrl['host'] ?? 'localhost') || 
                         $localUrl['host'] === '127.0.0.1' || $localUrl['host'] === 'localhost')) {
-                        // Convert to local file path
+                        // Convert to local file path with security validation
                         $relativePath = ltrim($localUrl['path'], '/');
+                        // Prevent directory traversal attacks
+                        $relativePath = str_replace(['../', '..\\'], '', $relativePath);
                         $localPath = public_path($relativePath);
+                        
+                        // Ensure the resolved path is within public directory
+                        $publicPath = realpath(public_path());
+                        $resolvedPath = realpath($localPath);
+                        if (!$resolvedPath || strpos($resolvedPath, $publicPath) !== 0) {
+                            $localPath = public_path('assets/images/billbridge.png');
+                        }
                         
                         if (file_exists($localPath)) {
                             $imageData = file_get_contents($localPath);
@@ -114,9 +123,23 @@ if (! function_exists('getPDFLogoUrl')) {
                             }
                         }
                     } else {
-                        // External URL, use HTTP request with timeout
+                        // External URL, use HTTP request with timeout and validation
                         try {
-                            $imageData = Http::timeout(10)->get($logoPath)->body();
+                            // Validate URL scheme and domain
+                            if (!filter_var($logoPath, FILTER_VALIDATE_URL) || 
+                                !in_array(parse_url($logoPath, PHP_URL_SCHEME), ['http', 'https'])) {
+                                throw new \Exception('Invalid URL scheme');
+                            }
+                            
+                            $response = Http::timeout(10)->get($logoPath);
+                            
+                            // Validate content type
+                            $contentType = $response->header('content-type');
+                            if (!$contentType || !str_starts_with($contentType, 'image/')) {
+                                throw new \Exception('Invalid content type');
+                            }
+                            
+                            $imageData = $response->body();
                             $imageType = pathinfo($logoPath, PATHINFO_EXTENSION);
                             $logoUrl = 'data:image/' . $imageType . ';base64,' . base64_encode($imageData);
                         } catch (\Exception $e) {
@@ -132,8 +155,16 @@ if (! function_exists('getPDFLogoUrl')) {
                         }
                     }
                 } else {
-                    // It's already a local path
+                    // It's already a local path - sanitize it
+                    $logoPath = str_replace(['../', '..\\'], '', $logoPath);
                     $localPath = public_path($logoPath);
+                    
+                    // Ensure the resolved path is within public directory
+                    $publicPath = realpath(public_path());
+                    $resolvedPath = realpath($localPath);
+                    if (!$resolvedPath || strpos($resolvedPath, $publicPath) !== 0) {
+                        $localPath = public_path('assets/images/billbridge.png');
+                    }
                     if (file_exists($localPath)) {
                         $imageData = file_get_contents($localPath);
                         $imageType = pathinfo($localPath, PATHINFO_EXTENSION);
@@ -883,12 +914,6 @@ if (!function_exists('getUserImageInitial')) {
 }
 
 
-if (!function_exists('getSettingValue')) {
-    function getSettingValue($keyName)
-    {
-        return Setting::where('key', $keyName)->first()->value ?? null;
-    }
-}
 
 if (!function_exists('getMercadopagoSupportedCurrencies')) {
     function getMercadopagoSupportedCurrencies(): array
