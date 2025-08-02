@@ -6,7 +6,7 @@ use App\Models\Invoice;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
 
-class DashbaordOverview extends BaseWidget
+class DashboardOverview extends BaseWidget
 {
     protected static string $view = 'client.widgets.dashboard';
 

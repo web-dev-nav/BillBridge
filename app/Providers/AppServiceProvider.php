@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Http\Responses\Auth\Contracts\LoginResponse;
 use Filament\Http\Responses\Auth\Contracts\LogoutResponse;
+use Filament\Facades\Filament;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Add middleware to protect Filament panels until installation is complete
+        Filament::serving(function () {
+            if (!file_exists(storage_path('installed'))) {
+                redirect()->route('installer')->send();
+            }
+        });
         
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch

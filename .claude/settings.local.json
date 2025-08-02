@@ -6,7 +6,11 @@
       "Bash(cp:*)",
       "Bash(chmod:*)",
       "Bash(rm:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(php artisan package:discover:*)",
+      "WebFetch(domain:github.com)",
+      "Bash(php artisan vendor:publish:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }
