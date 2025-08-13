@@ -55,10 +55,10 @@ class CustomInstallationManager implements InstallationContract
             $this->importDatabaseSchemaFromFile($schemaPath);
             Log::info('Database schema imported successfully');
 
-            // Create admin user with installer data
-            Log::info('Creating super admin user...');
-            $this->createAdminUser($data);
-            Log::info('Super admin user created successfully');
+            // Create default admin user
+            Log::info('Creating default super admin user...');
+            $this->createDefaultAdminUser();
+            Log::info('Default super admin user created successfully');
 
             // Store license information
             Log::info('Storing license information...');
@@ -273,34 +273,38 @@ class CustomInstallationManager implements InstallationContract
         }
     }
 
-    private function createAdminUser($data): void
+    private function createDefaultAdminUser(): void
     {
         $user = config('installer.user_model');
         
-        $adminName = array_get($data, 'applications.admin.name');
-        $nameParts = explode(' ', $adminName, 2);
-        
         // Check if admin user already exists from schema import
-        $adminUser = $user::where('email', array_get($data, 'applications.admin.email'))->first();
+        $adminUser = $user::where('is_default_admin', 1)->first();
         
         if (!$adminUser) {
-            // Create new admin user if not exists
+            // Create default admin user if not exists
+            $defaultAdmin = config('installer.default_admin');
             $adminUser = $user::create([
-                'first_name' => $nameParts[0] ?? 'Admin',
-                'last_name'  => $nameParts[1] ?? '',
-                'email'      => array_get($data, 'applications.admin.email'),
-                'password'   => bcrypt(array_get($data, 'applications.admin.password')),
+                'first_name' => $defaultAdmin['first_name'],
+                'last_name'  => $defaultAdmin['last_name'],
+                'email'      => $defaultAdmin['email'],
+                'password'   => bcrypt($defaultAdmin['password']),
                 'is_default_admin' => 1,
                 'email_verified_at' => now(),
             ]);
+            
+            Log::info('Default admin user created', [
+                'email' => $adminUser->email,
+                'default_password' => 'User should change password on first login'
+            ]);
         } else {
-            // Update existing admin user
+            // Update existing admin user to ensure it has proper defaults
             $adminUser->update([
-                'first_name' => $nameParts[0] ?? $adminUser->first_name,
-                'last_name'  => $nameParts[1] ?? $adminUser->last_name,
-                'email'      => array_get($data, 'applications.admin.email'),
-                'password'   => bcrypt(array_get($data, 'applications.admin.password')),
                 'is_default_admin' => 1,
+                'email_verified_at' => now(),
+            ]);
+            
+            Log::info('Existing admin user updated', [
+                'email' => $adminUser->email
             ]);
         }
 
@@ -410,9 +414,9 @@ class CustomInstallationManager implements InstallationContract
             Log::info('Running database seeders...');
             Artisan::call('db:seed', ['--force' => true]);
             
-            // Create admin user
-            Log::info('Creating admin user...');
-            $this->createAdminUser($data);
+            // Create default admin user
+            Log::info('Creating default admin user...');
+            $this->createDefaultAdminUser();
             
             // Store empty license info for fallback
             $licenseData = session('license_data', []);

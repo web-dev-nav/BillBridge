@@ -1,12 +1,11 @@
 <?php
 
 use Shipu\WebInstaller\Forms\Fields\ApplicationFields;
-use Shipu\WebInstaller\Forms\Fields\EnvironmentFields;
 use Shipu\WebInstaller\Forms\Fields\FolderPermissionStep;
 use Shipu\WebInstaller\Forms\Fields\ServerRequirementFields;
 use App\Installer\CustomInstallationManager;
 use App\Installer\Forms\LicenseVerificationFields;
-use App\Rules\DatabaseConnectionRule;
+use App\Installer\Forms\CustomEnvironmentFields;
 
 return [
 
@@ -18,8 +17,7 @@ return [
         ServerRequirementFields::class,
         FolderPermissionStep::class,
         LicenseVerificationFields::class,
-        EnvironmentFields::class,
-        ApplicationFields::class,
+        CustomEnvironmentFields::class,
     ],
 
     'redirect_route' => "welcome",
@@ -103,50 +101,35 @@ return [
             'database.host'     => [
                 'label'      => 'Database Host',
                 'required'   => true,
-                'rules'      => [
-                    'string', 'max:50',
-                    DatabaseConnectionRule::class,
-                ],
+                'rules'      => 'required|string|max:50',
                 'env_key'    => 'DB_HOST',
                 'config_key' => 'database.connections.mysql.host',
             ],
             'database.port'     => [
                 'label'      => 'Database Port',
                 'required'   => true,
-                'rules'      => [
-                    'numeric',
-                    DatabaseConnectionRule::class,
-                ],
+                'rules'      => 'required|numeric|min:1|max:65535',
                 'env_key'    => 'DB_PORT',
                 'config_key' => 'database.connections.mysql.port',
             ],
             'database.name'     => [
                 'label'      => 'Database Name',
                 'required'   => true,
-                'rules'      => [
-                    'string', 'max:50',
-                    DatabaseConnectionRule::class,
-                ],
+                'rules'      => 'required|string|max:50',
                 'env_key'    => 'DB_DATABASE',
                 'config_key' => 'database.connections.mysql.database',
             ],
             'database.username' => [
                 'label'      => 'Database Username',
                 'required'   => true,
-                'rules'      => [
-                    'string', 'max:50',
-                    DatabaseConnectionRule::class,
-                ],
+                'rules'      => 'required|string|max:50',
                 'env_key'    => 'DB_USERNAME',
                 'config_key' => 'database.connections.mysql.username',
             ],
             'database.password' => [
                 'label'      => 'Database Password',
                 'required'   => false,
-                'rules'      => [
-                    'nullable', 'string', 'max:50',
-                    DatabaseConnectionRule::class,
-                ],
+                'rules'      => 'nullable|string|max:50',
                 'env_key'    => 'DB_PASSWORD',
                 'config_key' => 'database.connections.mysql.password',
             ],
@@ -155,30 +138,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Applications Form
+    | Default Admin User
     |--------------------------------------------------------------------------
     |
-    | applications form fields
+    | Default admin user created automatically during installation
     |
     */
-    'applications'         => [
-        'admin.name'     => [
-            'label'    => 'Admin Name',
-            'required' => true,
-            'rules'    => 'string|max:100',
-            'default'  => 'Mr Admin'
-        ],
-        'admin.email'    => [
-            'label'    => 'Admin Email',
-            'required' => true,
-            'rules'    => 'string|max:100',
-            'default'  => 'admin@example.com'
-        ],
-        'admin.password' => [
-            'label'    => 'Admin Password',
-            'required' => true,
-            'rules'    => 'string|max:100',
-            'default'  => '12345678'
-        ],
+    'default_admin' => [
+        'first_name' => 'Super',
+        'last_name' => 'Admin', 
+        'email' => 'admin@billbridge.com',
+        'password' => '12345678'
     ]
 ];
