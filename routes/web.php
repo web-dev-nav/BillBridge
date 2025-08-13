@@ -10,6 +10,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\AdminPaymentController;
 use Illuminate\Support\Facades\Artisan;
 
+
 Route::get('/', function () {
     // Check if application is installed
     if (!file_exists(storage_path('installed'))) {

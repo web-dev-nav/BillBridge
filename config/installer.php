@@ -5,7 +5,8 @@ use Shipu\WebInstaller\Forms\Fields\EnvironmentFields;
 use Shipu\WebInstaller\Forms\Fields\FolderPermissionStep;
 use Shipu\WebInstaller\Forms\Fields\ServerRequirementFields;
 use App\Installer\CustomInstallationManager;
-use Shipu\WebInstaller\Rules\DatabaseConnectionRule;
+use App\Installer\Forms\LicenseVerificationFields;
+use App\Rules\DatabaseConnectionRule;
 
 return [
 
@@ -16,6 +17,7 @@ return [
     'steps' => [
         ServerRequirementFields::class,
         FolderPermissionStep::class,
+        LicenseVerificationFields::class,
         EnvironmentFields::class,
         ApplicationFields::class,
     ],

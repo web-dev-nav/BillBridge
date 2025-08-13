@@ -10,7 +10,9 @@
       "Bash(php artisan package:discover:*)",
       "WebFetch(domain:github.com)",
       "Bash(php artisan vendor:publish:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(mkdir:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }
