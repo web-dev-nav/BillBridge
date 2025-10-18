@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "781564b305249e853e85ba125880501e",
+    "content-hash": "b8ca13150f975cdd531fedfe2aef6269",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -716,6 +716,66 @@
                 }
             ],
             "time": "2024-02-09T16:56:22+00:00"
+        },
+        {
+            "name": "codelone/codec-web-installer",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/web-dev-nav/Codec-web-installer.git",
+                "reference": "7d87520827b507ec57380d4eda11e194192b44d9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/web-dev-nav/Codec-web-installer/zipball/7d87520827b507ec57380d4eda11e194192b44d9",
+                "reference": "7d87520827b507ec57380d4eda11e194192b44d9",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "laravel/framework": "^10.0|^11.0|^12.0",
+                "nesbot/carbon": "^2.0|^3.0",
+                "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Codelone\\CodecWebInstaller\\InstallerServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Codelone\\CodecWebInstaller\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Navjot",
+                    "email": "support@codelone.com"
+                }
+            ],
+            "description": "Codec Web Installer - WordPress-like installer package for Laravel applications",
+            "keywords": [
+                "deployment",
+                "installer",
+                "laravel",
+                "setup"
+            ],
+            "support": {
+                "issues": "https://github.com/web-dev-nav/Codec-web-installer/issues",
+                "source": "https://github.com/web-dev-nav/Codec-web-installer/tree/v1.0"
+            },
+            "time": "2025-09-17T02:23:21+00:00"
         },
         {
             "name": "composer/pcre",

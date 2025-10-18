@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Artisan;
 
 
 Route::get('/', function () {
+    // Check if application is installed
+    if (!file_exists(storage_path('installed'))) {
+        return redirect()->route('installer.welcome');
+    }
+
     if (!auth()->check()) {
         return redirect()->route('filament.admin.auth.login');
     }

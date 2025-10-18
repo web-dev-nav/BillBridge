@@ -4,6 +4,7 @@ use App\Http\Middleware\XSS;
 use Illuminate\Foundation\Application;
 use App\Http\Middleware\SetLanguageFront;
 use App\Http\Middleware\StoreUserLanguage;
+use App\Http\Middleware\RedirectIfNotInstalled;
 use Spatie\Permission\Middleware\RoleMiddleware;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,6 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->web(append: [
+            RedirectIfNotInstalled::class,
+        ]);
         $middleware->redirectGuestsTo(fn() => route('filament.admin.auth.login'));
         $middleware->validateCsrfTokens(
             except: ['client/razorpay-payment-success']
