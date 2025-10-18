@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     // Check if application is installed
-    if (!file_exists(storage_path('installed'))) {
+    $isInstalled = file_exists(storage_path('installed')) || file_exists(storage_path('installer.lock'));
+
+    if (!$isInstalled) {
         return redirect()->route('installer.welcome');
     }
 

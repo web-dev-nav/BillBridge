@@ -14,7 +14,7 @@
         "althinect/filament-spatie-roles-permissions": "^2.2",
         "barryvdh/laravel-dompdf": "^3.1",
         "bezhansalleh/filament-language-switch": "^3.1",
-        "codelone/codec-web-installer": "^1.0",
+        "codelone/codec-web-installer": "dev-main",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "laravel/framework": "^11.31",

@@ -1,0 +1,46 @@
+{
+  "cities": [
+    {
+      "id": 1,
+      "name": "Los Angeles",
+      "state_id": 1,
+      "created_at": "2024-01-01 00:00:00",
+      "updated_at": "2024-01-01 00:00:00"
+    },
+    {
+      "id": 2,
+      "name": "San Francisco",
+      "state_id": 1,
+      "created_at": "2024-01-01 00:00:00",
+      "updated_at": "2024-01-01 00:00:00"
+    },
+    {
+      "id": 3,
+      "name": "New York City",
+      "state_id": 2,
+      "created_at": "2024-01-01 00:00:00",
+      "updated_at": "2024-01-01 00:00:00"
+    },
+    {
+      "id": 4,
+      "name": "London City",
+      "state_id": 3,
+      "created_at": "2024-01-01 00:00:00",
+      "updated_at": "2024-01-01 00:00:00"
+    },
+    {
+      "id": 5,
+      "name": "Mumbai",
+      "state_id": 4,
+      "created_at": "2024-01-01 00:00:00",
+      "updated_at": "2024-01-01 00:00:00"
+    },
+    {
+      "id": 6,
+      "name": "Pune",
+      "state_id": 4,
+      "created_at": "2024-01-01 00:00:00",
+      "updated_at": "2024-01-01 00:00:00"
+    }
+  ]
+}

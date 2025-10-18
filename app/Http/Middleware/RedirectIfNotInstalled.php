@@ -15,11 +15,19 @@ class RedirectIfNotInstalled
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if application is installed
-        if (!file_exists(storage_path('installed'))) {
+        // Check if application is installed (check both possible lock files)
+        $isInstalled = file_exists(storage_path('installed')) ||
+                       file_exists(storage_path('installer.lock'));
+
+        if (!$isInstalled) {
             // Allow installer routes
             if (!$request->is('installer*')) {
                 return redirect()->route('installer.welcome');
+            }
+        } else {
+            // If installed, redirect away from installer routes
+            if ($request->is('installer*')) {
+                return redirect('/');
             }
         }
 

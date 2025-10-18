@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b8ca13150f975cdd531fedfe2aef6269",
+    "content-hash": "ad75d35bdac528188583d511ee416fff",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -719,28 +719,29 @@
         },
         {
             "name": "codelone/codec-web-installer",
-            "version": "v1.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-dev-nav/Codec-web-installer.git",
-                "reference": "7d87520827b507ec57380d4eda11e194192b44d9"
+                "reference": "fa90b0e5e5e030e37cdb9193b1e58bbe929f1b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-dev-nav/Codec-web-installer/zipball/7d87520827b507ec57380d4eda11e194192b44d9",
-                "reference": "7d87520827b507ec57380d4eda11e194192b44d9",
+                "url": "https://api.github.com/repos/web-dev-nav/Codec-web-installer/zipball/fa90b0e5e5e030e37cdb9193b1e58bbe929f1b7d",
+                "reference": "fa90b0e5e5e030e37cdb9193b1e58bbe929f1b7d",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^7.0",
-                "laravel/framework": "^10.0|^11.0|^12.0",
+                "laravel/framework": "^8.0|^9.0|^10.0|^11.0|^12.0",
                 "nesbot/carbon": "^2.0|^3.0",
-                "php": "^8.2"
+                "php": "^7.4|^8.0|^8.1|^8.2|^8.3|^8.4"
             },
             "require-dev": {
-                "orchestra/testbench": "^8.0|^9.0",
-                "phpunit/phpunit": "^10.0"
+                "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0",
+                "phpunit/phpunit": "^9.0|^10.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -773,9 +774,9 @@
             ],
             "support": {
                 "issues": "https://github.com/web-dev-nav/Codec-web-installer/issues",
-                "source": "https://github.com/web-dev-nav/Codec-web-installer/tree/v1.0"
+                "source": "https://github.com/web-dev-nav/Codec-web-installer/tree/main"
             },
-            "time": "2025-09-17T02:23:21+00:00"
+            "time": "2025-10-18T09:47:20+00:00"
         },
         {
             "name": "composer/pcre",
@@ -13697,7 +13698,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "codelone/codec-web-installer": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
