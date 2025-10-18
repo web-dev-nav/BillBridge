@@ -11,28 +11,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function ($table) {
-            $table->string('name', 161)->change();
+            $table->string('name', 125)->change();
         });
         Schema::table('countries', function ($table) {
-            $table->string('name', 161)->change();
-            $table->string('short_code', 161)->change();
+            $table->string('name', 125)->change();
+            $table->string('short_code', 125)->change();
         });
         Schema::table('failed_jobs', function ($table) {
-            $table->string('uuid', 161)->change();
+            $table->string('uuid', 125)->change();
         });
         Schema::table('media', function ($table) {
-            $table->uuid('uuid', 161)->change();
+            $table->uuid('uuid', 125)->change();
         });
         Schema::table('permissions', function ($table) {
-            $table->string('name', 161)->change();
-            $table->string('guard_name', 161)->change();
+            $table->string('name', 125)->change();
+            $table->string('guard_name', 125)->change();
         });
         Schema::table('roles', function ($table) {
-            $table->string('name', 161)->change();
-            $table->string('guard_name', 161)->change();
+            $table->string('name', 125)->change();
+            $table->string('guard_name', 125)->change();
         });
         Schema::table('users', function ($table) {
-            $table->string('email', 161)->change();
+            $table->string('email', 125)->change();
         });
     }
 
