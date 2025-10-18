@@ -15,8 +15,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/plugins.css') }}">
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://checkout.razorpay.com/v1/checkout.js" data-turbolinks-eval="false" data-turbo-eval="false">
-    </script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js" data-turbolinks-eval="false" data-turbo-eval="false"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('messages.js') }}"></script>
     @vite('resources/js/payment.js')

@@ -1,5 +1,3 @@
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script src="https://sdk.mercadopago.com/js/v2"></script>
 <script>
 var invoiceTitle = "{{ __('messages.invoice.copy_invoice_url') }}";
     function copyURL(url) {

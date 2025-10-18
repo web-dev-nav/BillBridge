@@ -13,7 +13,9 @@
       "Bash(ls:*)",
       "Bash(mkdir:*)",
       "Bash(find:*)",
-      "Bash(composer remove:*)"
+      "Bash(composer remove:*)",
+      "Bash(php artisan:*)",
+      "Bash(php artisan view:cache:*)"
     ],
     "deny": []
   }
