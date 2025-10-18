@@ -12,7 +12,8 @@
       "Bash(php artisan vendor:publish:*)",
       "Bash(ls:*)",
       "Bash(mkdir:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(composer remove:*)"
     ],
     "deny": []
   }

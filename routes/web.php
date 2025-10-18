@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Artisan;
 
 
 Route::get('/', function () {
-    // Check if application is installed
-    if (!file_exists(storage_path('installed'))) {
-        return redirect()->route('installer');
-    }
-    
     if (!auth()->check()) {
         return redirect()->route('filament.admin.auth.login');
     }
@@ -42,7 +37,7 @@ Route::get(
 
 
 //? for Admin
-Route::middleware(['auth', 'role:admin', 'redirect.if.not.installed'])->group(function () {
+Route::middleware(['auth', 'role:admin'])->group(function () {
     //? invoice
     Route::prefix('invoices')->name('invoices.')->group(function () {
         Route::get('/{invoice}/pdf', [InvoiceController::class, 'convertToPdf'])->name('pdf');
@@ -57,7 +52,7 @@ Route::middleware(['auth', 'role:admin', 'redirect.if.not.installed'])->group(fu
 Route::get('/client-onboard/{id}', ResetClientPassword::class)->name('client.password.reset')->middleware('setLanguageFront');
 
 //? for Client
-Route::middleware(['auth', 'role:client', 'redirect.if.not.installed'])->group(function () {
+Route::middleware(['auth', 'role:client'])->group(function () {
     //? invoice
     Route::get('/invoice-excel', [InvoiceController::class, 'clientExportInvoicesExcel'])->name('client.invoicesExcel');
     Route::get('invoice-pdf', [InvoiceController::class, 'clientExportInvoicesPdf'])->name('client.invoices.pdf');

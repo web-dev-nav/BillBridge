@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9e426fcf9a2f84717f5da68f418c1b3",
+    "content-hash": "781564b305249e853e85ba125880501e",
     "packages": [
         {
             "name": "althinect/filament-spatie-roles-permissions",
@@ -443,12 +443,12 @@
             "version": "2.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blade-ui-kit/blade-heroicons.git",
+                "url": "https://github.com/driesvints/blade-heroicons.git",
                 "reference": "4553b2a1f6c76f0ac7f3bc0de4c0cfa06a097d19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-heroicons/zipball/4553b2a1f6c76f0ac7f3bc0de4c0cfa06a097d19",
+                "url": "https://api.github.com/repos/driesvints/blade-heroicons/zipball/4553b2a1f6c76f0ac7f3bc0de4c0cfa06a097d19",
                 "reference": "4553b2a1f6c76f0ac7f3bc0de4c0cfa06a097d19",
                 "shasum": ""
             },
@@ -512,12 +512,12 @@
             "version": "1.8.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/blade-ui-kit/blade-icons.git",
+                "url": "https://github.com/driesvints/blade-icons.git",
                 "reference": "7b743f27476acb2ed04cb518213d78abe096e814"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/blade-ui-kit/blade-icons/zipball/7b743f27476acb2ed04cb518213d78abe096e814",
+                "url": "https://api.github.com/repos/driesvints/blade-icons/zipball/7b743f27476acb2ed04cb518213d78abe096e814",
                 "reference": "7b743f27476acb2ed04cb518213d78abe096e814",
                 "shasum": ""
             },
@@ -3097,63 +3097,6 @@
                 "source": "https://github.com/laravel/framework"
             },
             "time": "2025-02-12T20:58:18+00:00"
-        },
-        {
-            "name": "laravel/helpers",
-            "version": "v1.7.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/helpers.git",
-                "reference": "672d79d5b5f65dc821e57783fa11f22c4d762d70"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/helpers/zipball/672d79d5b5f65dc821e57783fa11f22c4d762d70",
-                "reference": "672d79d5b5f65dc821e57783fa11f22c4d762d70",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
-                "php": "^7.2.0|^8.0"
-            },
-            "require-dev": {
-                "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^7.0|^8.0|^9.0|^10.0"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "src/helpers.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Taylor Otwell",
-                    "email": "taylor@laravel.com"
-                },
-                {
-                    "name": "Dries Vints",
-                    "email": "dries@laravel.com"
-                }
-            ],
-            "description": "Provides backwards compatibility for helpers in the latest Laravel release.",
-            "keywords": [
-                "helpers",
-                "laravel"
-            ],
-            "support": {
-                "source": "https://github.com/laravel/helpers/tree/v1.7.2"
-            },
-            "time": "2025-01-24T15:41:25+00:00"
         },
         {
             "name": "laravel/prompts",
@@ -6796,58 +6739,6 @@
                 }
             ],
             "time": "2025-03-01T18:36:10+00:00"
-        },
-        {
-            "name": "shipu/web-installer",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Shipu/web-installer.git",
-                "reference": "694d67dad00e92b73e4b17d0207cba982101751a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Shipu/web-installer/zipball/694d67dad00e92b73e4b17d0207cba982101751a",
-                "reference": "694d67dad00e92b73e4b17d0207cba982101751a",
-                "shasum": ""
-            },
-            "require": {
-                "filament/forms": "^3.0-stable",
-                "filament/support": "^3.0-stable",
-                "laravel/helpers": "^1.6",
-                "livewire/livewire": "^3.0@beta",
-                "spatie/laravel-package-tools": "^1.9"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "aliases": [],
-                    "providers": [
-                        "Shipu\\WebInstaller\\WebInstallerServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Shipu\\WebInstaller\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Shipu Ahamed",
-                    "email": "shipuahamed01@gmail.com"
-                }
-            ],
-            "description": "Laravel Web Installer",
-            "support": {
-                "issues": "https://github.com/Shipu/web-installer/issues",
-                "source": "https://github.com/Shipu/web-installer/tree/v1.0.1"
-            },
-            "time": "2023-10-05T18:59:27+00:00"
         },
         {
             "name": "spatie/color",

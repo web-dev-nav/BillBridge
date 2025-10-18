@@ -5,7 +5,6 @@ use Illuminate\Foundation\Application;
 use App\Http\Middleware\SetLanguageFront;
 use App\Http\Middleware\StoreUserLanguage;
 use Spatie\Permission\Middleware\RoleMiddleware;
-use Shipu\WebInstaller\Middleware\RedirectIfNotInstalled;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
@@ -23,8 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'role' => RoleMiddleware::class,
             'storeLanguage' => StoreUserLanguage::class,
-            'setLanguageFront' => SetLanguageFront::class,
-            'redirect.if.not.installed' => RedirectIfNotInstalled::class
+            'setLanguageFront' => SetLanguageFront::class
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

@@ -38,13 +38,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        // Add middleware to protect Filament panels until installation is complete
-        Filament::serving(function () {
-            if (!file_exists(storage_path('installed'))) {
-                redirect()->route('installer')->send();
-            }
-        });
-        
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
                 ->userPreferredLocale(function () {

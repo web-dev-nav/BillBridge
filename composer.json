@@ -24,7 +24,6 @@
         "mariuzzo/laravel-js-localization": "^1.11",
         "opcodesio/log-viewer": "^3.15",
         "razorpay/razorpay": "^2.9",
-        "shipu/web-installer": "^1.0",
         "srmklive/paypal": "~3.0",
         "stripe/stripe-php": "^16.5",
         "tapp/filament-country-code-field": "^1.0",
