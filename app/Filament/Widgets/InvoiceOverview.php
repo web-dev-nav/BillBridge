@@ -8,6 +8,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 class InvoiceOverview extends ChartWidget
 {
+    protected static bool $isLazy = true;
     protected static ?int $sort = 4;
     protected static ?array $options = [
         'scales' => [
@@ -35,9 +36,8 @@ class InvoiceOverview extends ChartWidget
     protected function getData(): array
     {
         $data = [];
-        $invoice = Invoice::toBase()->get();
-        $data['total_paid_invoices'] = $invoice->where('status', Invoice::PAID)->count();
-        $data['total_unpaid_invoices'] = $invoice->where('status', Invoice::UNPAID)->count();
+        $data['total_paid_invoices'] = Invoice::where('status', Invoice::PAID)->count();
+        $data['total_unpaid_invoices'] = Invoice::where('status', Invoice::UNPAID)->count();
         $data['labels'] = [
             __('messages.paid_invoices'),
             __('messages.unpaid_invoices'),

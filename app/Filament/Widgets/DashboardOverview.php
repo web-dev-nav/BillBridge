@@ -10,7 +10,7 @@ use Filament\Widgets\StatsOverviewWidget\Stat;
 
 class DashboardOverview extends BaseWidget
 {
-
+    protected static bool $isLazy = true;
     protected static string $view = 'filament.widgets.dashboard';
 
     public static function canView(): bool
@@ -19,12 +19,11 @@ class DashboardOverview extends BaseWidget
     }
     protected function getViewData(): array
     {
-        $invoice = Invoice::toBase()->get();
-        $totalInvoices = $invoice->count();
+        $totalInvoices = Invoice::count();
         $totalClients = Client::count();
         $totalProducts = Product::count();
-        $paidInvoices = $invoice->where('status', Invoice::PAID)->count();
-        $unpaidInvoices = $invoice->where('status', Invoice::UNPAID)->count();
+        $paidInvoices = Invoice::where('status', Invoice::PAID)->count();
+        $unpaidInvoices = Invoice::where('status', Invoice::UNPAID)->count();
 
 
         return [

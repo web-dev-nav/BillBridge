@@ -40,9 +40,9 @@ class NotificationRead extends Component
     public function render()
     {
         $notifications =  Notification::where('user_id', auth()->user()->id)
-            ->where('read_at', null)
+            ->whereNull('read_at')
             ->orderBy('created_at', 'desc')
-            ->toBase()
+            ->limit(10)
             ->get() ?? collect();
 
         return view('livewire.notification-read', ['notifications' => $notifications]);

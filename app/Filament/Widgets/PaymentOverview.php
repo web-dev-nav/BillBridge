@@ -9,6 +9,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 class PaymentOverview extends ChartWidget
 {
+    protected static bool $isLazy = true;
     protected static ?int $sort = 3;
     protected static ?array $options = [
         'scales' => [
@@ -35,9 +36,8 @@ class PaymentOverview extends ChartWidget
     protected function getData(): array
     {
         $data = [];
-        $invoice = Invoice::toBase()->get();
         $data['received_amount'] = Payment::sum('amount');
-        $data['invoice_amount'] = $invoice->where('status', '!=', Invoice::DRAFT)->sum('final_amount');
+        $data['invoice_amount'] = Invoice::where('status', '!=', Invoice::DRAFT)->sum('final_amount');
         $data['due_amount'] = $data['invoice_amount'] - $data['received_amount'];
         $data['labels'] = [
             __('messages.received_amount'),
