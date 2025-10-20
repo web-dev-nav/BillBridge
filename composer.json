@@ -70,6 +70,8 @@
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
         "post-install-cmd": [
+            "@php -r \"!is_dir('storage/app') && mkdir('storage/app', 0755, true);\"",
+            "@php -r \"!is_dir('storage/app/public') && mkdir('storage/app/public', 0755, true);\"",
             "@php -r \"!is_dir('storage/framework/cache/data') && mkdir('storage/framework/cache/data', 0755, true);\"",
             "@php -r \"!is_dir('storage/framework/sessions') && mkdir('storage/framework/sessions', 0755, true);\"",
             "@php -r \"!is_dir('storage/framework/views') && mkdir('storage/framework/views', 0755, true);\"",
