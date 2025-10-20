@@ -62,9 +62,9 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php -r \"if (file_exists('.env')) { passthru('php artisan package:discover --ansi'); }\"",
-            "@php -r \"if (file_exists('.env')) { passthru('php artisan log-viewer:publish'); }\"",
-            "@php -r \"if (file_exists('.env')) { passthru('php artisan filament:upgrade'); }\""
+            "@php -r \"file_exists('.env') && passthru('php artisan package:discover --ansi') || exit(0);\"",
+            "@php -r \"file_exists('.env') && passthru('php artisan log-viewer:publish') || exit(0);\"",
+            "@php -r \"file_exists('.env') && passthru('php artisan filament:upgrade') || exit(0);\""
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
