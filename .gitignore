@@ -1,9 +1,6 @@
 /.phpunit.cache
 /node_modules
-/public/build
 /public/hot
-/public/js
-/public/css
 /public/vendor/filament-phone-input
 /public/storage
 /storage/*.key
