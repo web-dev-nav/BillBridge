@@ -39,7 +39,12 @@ if (! function_exists('getAppName')) {
         /** @var Setting $appName */
         static $appName;
         if (empty($appName)) {
-            $appName = Setting::where('key', '=', 'app_name')->first();
+            try {
+                $appName = Setting::where('key', '=', 'app_name')->first();
+            } catch (\Exception $e) {
+                // Database not ready or settings table doesn't exist
+                return 'BillBridge';
+            }
         }
 
         return $appName->value ?? 'BillBridge';
@@ -53,20 +58,25 @@ if (! function_exists('getLogoUrl')) {
         static $logoUrl;
 
         if (empty($logoUrl)) {
-            $appLogo = Setting::where('key', '=', 'app_logo')->first();
-            
-            if ($appLogo) {
-                // Check if there are media files attached
-                $media = $appLogo->media->first();
-                if (!empty($media)) {
-                    $logoUrl = $media->getFullUrl();
+            try {
+                $appLogo = Setting::where('key', '=', 'app_logo')->first();
+
+                if ($appLogo) {
+                    // Check if there are media files attached
+                    $media = $appLogo->media->first();
+                    if (!empty($media)) {
+                        $logoUrl = $media->getFullUrl();
+                    } else {
+                        // Use the value from database or fallback to default
+                        $logoPath = $appLogo->value ?? 'assets/images/billbridge.png';
+                        $logoUrl = asset($logoPath);
+                    }
                 } else {
-                    // Use the value from database or fallback to default
-                    $logoPath = $appLogo->value ?? 'assets/images/billbridge.png';
-                    $logoUrl = asset($logoPath);
+                    // Fallback if no setting exists
+                    $logoUrl = asset('assets/images/billbridge.png');
                 }
-            } else {
-                // Fallback if no setting exists
+            } catch (\Exception $e) {
+                // Database not ready or settings table doesn't exist
                 $logoUrl = asset('assets/images/billbridge.png');
             }
         }

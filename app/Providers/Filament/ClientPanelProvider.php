@@ -89,7 +89,8 @@ class ClientPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
                 // StoreUserLanguage::class,
-                CheckPanel::class
+                CheckPanel::class,
+                \App\Http\Middleware\RedirectIfNotInstalled::class,
             ])
             ->authMiddleware([
                 Authenticate::class . ':client',

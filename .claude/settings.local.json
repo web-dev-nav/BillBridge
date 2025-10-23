@@ -15,7 +15,10 @@
       "Bash(find:*)",
       "Bash(composer remove:*)",
       "Bash(php artisan:*)",
-      "Bash(php artisan view:cache:*)"
+      "Bash(php artisan view:cache:*)",
+      "Bash(git add .gitignore composer.json storage/framework/cache/data/.gitkeep)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nfix: ensure storage/framework/cache/data directory exists on deployment\n\n- Added .gitkeep to storage/framework/cache/data directory\n- Updated .gitignore to include the data directory structure\n- Added post-install-cmd script to automatically create all required storage directories during deployment\n\nThis resolves the \"Please provide a valid cache path\" error by ensuring all necessary directories exist with proper permissions.\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Read(//mnt/d/github/**)"
     ],
     "deny": []
   }

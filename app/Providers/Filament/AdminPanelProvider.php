@@ -110,7 +110,8 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                StoreUserLanguage::class
+                StoreUserLanguage::class,
+                \App\Http\Middleware\RedirectIfNotInstalled::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
