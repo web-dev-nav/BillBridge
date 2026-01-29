@@ -179,7 +179,7 @@ header {
 }
 
 .header__bg {
-    background: url("../images/invoices-hero-image.png") right top no-repeat;
+    background: none;
     background-size: 34vw;
     background-position: calc(50% + 300px) 50%;
 }
