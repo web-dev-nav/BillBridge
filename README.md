@@ -1,4 +1,4 @@
-# BillBridge - Invoice Management System
+# BillBridge – Professional Invoice & Billing Management System (Digital Delivery)
 
 This is the Invoice Management System where users can manage all the invoices in one place and digitally.
 
